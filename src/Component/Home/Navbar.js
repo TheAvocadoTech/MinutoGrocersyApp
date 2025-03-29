@@ -24,7 +24,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed w-full z-50">
+    <div className="sticky w-full z-50">
       {/* White Top Header */}
       <div className="hidden md:block bg-white text-gray-700 py-2">
         <div className="container mx-auto flex justify-end space-x-4 text-sm px-4">

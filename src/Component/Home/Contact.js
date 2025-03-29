@@ -3,7 +3,7 @@ import { MapPin, Mail, MessageCircle, Phone, Home } from 'lucide-react';
 
 const ContactSection = () => {
   return (
-    <section className="bg-white shadow-lg">
+    <section className="bg-white shadow-lg ">
       {/* Google Maps Iframe */}
       <div className="w-full h-[500px]">
         <iframe 
