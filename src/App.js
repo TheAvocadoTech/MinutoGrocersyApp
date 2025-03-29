@@ -21,13 +21,7 @@ const App = () => {
       <Navbar/>
       <Routes>
         <Route path="/" element={<MainPage/>} />
-       <Route path="/internship" element={<InternshipApplication/>}/>
-       <Route path="/services" element={<Services/>}/>
-        <Route path="/job" element={<JobOpenings/>}/>
-       <Route path="/gallery" element={<Gallery/>}/>
-       <Route path="/blog" element={<BlogPage/>}/>
-       <Route path="/case-study" element={<Portfolio/>}/>
-        <Route path="/contact" element={<ContactSection/>}/>
+      
      
       </Routes>
       <Footer/>
