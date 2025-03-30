@@ -102,10 +102,13 @@ const Navbar = () => {
     }
   };
 
+
+  
+
   return (
     <>
       {/* Mobile View */}
-      <div className="block md:hidden fixed inset-x-0 z-50">
+      <div className="block md:hidden sticky inset-x-0 z-50">
         {/* Top Search Bar & Logo */}
         <div className="bg-red-500 p-4 shadow-sm text-white">
           <div className="flex items-center space-x-2">
@@ -151,7 +154,11 @@ const Navbar = () => {
             {[
               { href: "/", icon: <Home size={20} />, label: "Home" },
               { href: "/categories", icon: <Grid size={20} />, label: "Categories" },
-              { href: "/cart", icon: <Utensils size={20} />, label: "Cart" },
+              { 
+                href: "/cart", 
+                icon: <Utensils size={20} />, 
+                label: "Cart",
+              },
               { href: "/profile", icon: <ShoppingCart size={20} />, label: "Profile", showCounter: true }
             ].map(({ href, icon, label, showCounter }) => (
               <a 
@@ -220,7 +227,7 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar - Desktop */}
-          <div className="hidden md:block flex-grow max-w-8xl mx-4">
+          <div className="hidden md:block flex-grow max-w-8xl mx-4 rounded-lg">
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"

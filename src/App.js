@@ -4,25 +4,23 @@ import Navbar from './Component/Home/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './Component/Home/Footer'
 
-import NotFound from './Component/Home/Home'
 
-import ContactSection from './Component/Home/Contact'
-import InternshipApplication from './Component/Home/Internship'
-import Gallery from './Component/Home/Gallery'
-import BlogPage from './Component/Home/BlogPage'
-import Portfolio from './Component/Home/CaseStudio'
-import MainPage from './Component/Home/MainPage'
-import JobOpenings from './Component/Home/JobPage'
-import Services from './Component/Home/Services'
+
+import MainLayout from './Component/Home/MainLayout'
+import UserProfile from './Component/Home/Profile'
+import RiceOilPage from './Component/Home/CategoryDetails'
+import ProductDetailPage from './Component/Home/ProductDetail'
 
 const App = () => {
   return (
     <div>
       <Navbar/>
       <Routes>
-        <Route path="/" element={<MainPage/>} />
-      
-     
+        <Route path="/" element={<MainLayout/>} />
+        <Route path="/profile" element={<UserProfile/>} />
+        <Route path="/categoryDetail" element={<RiceOilPage/>} />
+
+        <Route path="/productdetail" element={<ProductDetailPage/>} />
       </Routes>
       <Footer/>
     </div>

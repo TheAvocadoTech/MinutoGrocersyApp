@@ -14,16 +14,16 @@ const PhoneVerification = ({ onSubmit }) => {
   };
 
   return (
-    <div className="px-6 py-8 max-w-md mx-auto bg-white shadow-md rounded-md">
+    <div className="px-6 py-8 w-/2  bg-red-500  rounded-md">
       <div className="flex flex-col items-center mb-6">
-        <img src="/images/minitos.png" alt="Minutos Logo" className="w-32 h-12 object-contain" />
+        <img src="https://www.minutos.in/images/minitos-White.png" alt="Minutos Logo" className="w-32 h-12 object-contain" />
         <p className="text-red-500 text-sm mt-1">Your Local Delivery Partner</p>
       </div>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <div className={`flex border rounded-md overflow-hidden ${!isValid ? 'border-red-500' : 'border-gray-300'}`}>            
-            <div className="bg-gray-100 px-3 py-2 text-gray-600 border-r">+91</div>
+          <div className={`flex border rounded-md overflow-hidden`}>            
+            <div className=" px-3 py-2 text-white border-r ">+91</div>
             <input
               type="tel"
               placeholder="Enter Mobile Number"
@@ -40,13 +40,13 @@ const PhoneVerification = ({ onSubmit }) => {
 
         <button
           type="submit"
-          className="w-full bg-gray-400 text-white py-2 rounded-md hover:bg-gray-500 transition"
+          className="w-full bg-white text-red-500 font-bold py-2 rounded-md "
         >
           Continue
         </button>
       </form>
 
-      <p className="text-xs text-gray-500 text-center mt-4">
+      <p className="text-xs text-white text-center mt-4">
         By continuing, you agree to our Terms of Service & Privacy Policy
       </p>
     </div>
