@@ -1,4 +1,4 @@
-# E-commerce Dashboard Frontend
+Minutos Grocery app
 
 This project is a React.js-based frontend for an e-commerce dashboard, designed to provide a seamless user experience for managing products, orders, users, and analytics.
 
