@@ -60,66 +60,58 @@ const GroceryApp = () => {
   ];
   
   return (
-    <div className="ml-20 mx-auto pb-6  mt-36 mr-20">
+    <div className="mx-auto py-6 px-4 md:px-6 lg:px-20 mt-16 md:mt-24 lg:mt-36">
       {/* Special Offer Banner */}
       <div className="mb-4 relative">
-        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-4">
-          <button className="bg-white text-red-400 text-xs py-1 px-3 rounded-md border border-white">ORDER NOW</button>
-          <div className="text-xl font-bold">Banner Adds</div>
-          <div className="w-16"></div> {/* Placeholder for balance */}
+        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
+          <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
+          <div className="text-lg md:text-xl font-bold">Banner Adds</div>
+          <div className="w-8 md:w-16"></div> {/* Placeholder for balance */}
         </div>
-        {/* Blue vertical line (design element) */}
-       
       </div>
       
       {/* Categories */}
       {categories.slice(0, 2).map((category, index) => (
-        <div key={index} className="mb-6 relative px-4">
-          <div className="flex justify-between items-center mb-4">
+        <div key={index} className="mb-6 relative px-2 md:px-4">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
             <h2 className="text-red-500 font-medium text-sm">{category.section}</h2>
             <a href="#" className="text-blue-500 text-xs">See All</a>
           </div>
           
-          <div className="grid grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
             {category.items.map((item, idx) => (
               <div 
                 key={idx} 
-                className={`flex flex-col items-center `}
+                className="flex flex-col items-center"
               >
-                <div className="bg-gray-200 w-full aspect-square rounded-lg mb-2"></div>
+                <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
                 <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
               </div>
             ))}
           </div>
-          
-          {/* Blue vertical line continuing */}
-          
         </div>
       ))}
       
       {/* Special Offer with Price */}
       <div className="mb-4 relative">
-        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-4">
-          <button className="bg-white text-red-400 text-xs py-1 px-3 rounded-md border border-white">ORDER NOW</button>
-          <div className="text-xl font-bold">Banner Adds</div>
-          <div className="w-16"></div>
+        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
+          <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
+          <div className="text-lg md:text-xl font-bold">Banner Adds</div>
+          <div className="w-8 md:w-16"></div>
         </div>
-        
-        {/* Price tag */}
-        
       </div>
       
       {/* Third category (Daily Essentials) */}
-      <div className="mb-6 px-4">
-        <div className="flex justify-between items-center mb-4">
+      <div className="mb-6 px-2 md:px-4">
+        <div className="flex justify-between items-center mb-3 md:mb-4">
           <h2 className="text-red-500 font-medium text-sm">{categories[2].section}</h2>
           <a href="#" className="text-blue-500 text-xs">See All</a>
         </div>
         
-        <div className="grid grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {categories[2].items.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-2"></div>
+              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
               <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
             </div>
           ))}
@@ -128,24 +120,24 @@ const GroceryApp = () => {
       
       {/* Banner 3 */}
       <div className="mb-4">
-        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-4">
-          <button className="bg-white text-red-400 text-xs py-1 px-3 rounded-md border border-white">ORDER NOW</button>
-          <div className="text-xl font-bold">Banner Adds</div>
+        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
+          <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
+          <div className="text-lg md:text-xl font-bold">Banner Adds</div>
           <div className="text-xs text-white">See All</div>
         </div>
       </div>
       
       {/* Fourth category (Household & Cleaning) */}
-      <div className="mb-6 px-4">
-        <div className="flex justify-between items-center mb-4">
+      <div className="mb-6 px-2 md:px-4">
+        <div className="flex justify-between items-center mb-3 md:mb-4">
           <h2 className="text-red-500 font-medium text-sm">{categories[3].section}</h2>
           <a href="#" className="text-blue-500 text-xs">See All</a>
         </div>
         
-        <div className="grid grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {categories[3].items.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-2"></div>
+              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
               <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
             </div>
           ))}
@@ -154,24 +146,24 @@ const GroceryApp = () => {
       
       {/* Banner 4 */}
       <div className="mb-4">
-        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-4">
-          <button className="bg-white text-red-400 text-xs py-1 px-3 rounded-md border border-white">ORDER NOW</button>
-          <div className="text-xl font-bold">Banner Adds</div>
+        <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
+          <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
+          <div className="text-lg md:text-xl font-bold">Banner Adds</div>
           <div className="text-xs text-white">See All</div>
         </div>
       </div>
       
       {/* Fifth category (Special Categories) */}
-      <div className="px-4">
-        <div className="flex justify-between items-center mb-4">
+      <div className="px-2 md:px-4">
+        <div className="flex justify-between items-center mb-3 md:mb-4">
           <h2 className="text-red-500 font-medium text-sm">{categories[4].section}</h2>
           <a href="#" className="text-blue-500 text-xs">See All</a>
         </div>
         
-        <div className="grid grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {categories[4].items.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-2"></div>
+              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
               <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
             </div>
           ))}
