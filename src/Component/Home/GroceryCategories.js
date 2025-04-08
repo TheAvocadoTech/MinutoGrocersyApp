@@ -5,56 +5,56 @@ const GroceryApp = () => {
     {
       section: "Grocery & Kitchen",
       items: [
-        { name: "Fruits & Vegetables", selected: false },
-        { name: "Dairy, Bread & Eggs", selected: true },
-        { name: "Atta, Rice, Oil & Dals", selected: false },
-        { name: "Masala & Dry Fruits", selected: false },
-        { name: "Breakfast & Sauces", selected: false },
-        { name: "Packaged Food", selected: false }
+        { name: "Fruits & Vegetables", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-3_9.png" },
+        { name: "Dairy, Bread & Eggs", selected: true, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-2_10.png" },
+        { name: "Atta, Rice, Oil & Dals", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-10.png" },
+        { name: "Masala & Dry Fruits", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-10.png" },
+        { name: "Breakfast & Sauces", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-10.png" },
+        { name: "Packaged Food", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-10.png" }
       ]
     },
     {
       section: "Snacks & Drinks",
       items: [
-        { name: "Tea, Coffee & More", selected: false },
-        { name: "Ice Cream & More", selected: false },
-        { name: "Frozen Food", selected: false },
-        { name: "Cool Drinks & Juices", selected: false },
-        { name: "Chocolates & Biscuits", selected: false },
-        { name: "Munchies", selected: false }
+        { name: "Tea, Coffee & More", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png" },
+        { name: "Ice Cream & More", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png" },
+        { name: "Frozen Food", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png" },
+        { name: "Cool Drinks & Juices", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png" },
+        { name: "Chocolates & Biscuits", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png" },
+        { name: "Munchies", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png" }
       ]
     },
     {
       section: "Daily Essentials",
       items: [
-        { name: "Diapers", selected: false },
-        { name: "Baby Care", selected: false },
-        { name: "Bath & Body", selected: false },
-        { name: "Skin Care", selected: false },
-        { name: "Makeup", selected: false },
-        { name: "Others", selected: false }
+        { name: "Diapers", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Baby Care", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Bath & Body", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Skin Care", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Makeup", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Others", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" }
       ]
     },
     {
       section: "Household & Cleaning",
       items: [
-        { name: "Cleaners", selected: false },
-        { name: "Washing Powder", selected: false },
-        { name: "Fresheners", selected: false },
-        { name: "Liquid Detergent", selected: false },
-        { name: "Dishwasher", selected: false },
-        { name: "Floor Cleaners", selected: false }
+        { name: "Cleaners", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Washing Powder", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Fresheners", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Liquid Detergent", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Dishwasher", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" },
+        { name: "Floor Cleaners", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png" }
       ]
     },
     {
       section: "Special Categories",
       items: [
-        { name: "Appliances", selected: false },
-        { name: "Phones", selected: false },
-        { name: "Clothes", selected: false },
-        { name: "Home Decor", selected: false },
-        { name: "Fitness", selected: false },
-        { name: "TV & Electronics", selected: false }
+        { name: "Appliances", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=180/app/images/products/sliding_image/511859a.jpg?ts=1742805449" },
+        { name: "Phones", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=180/app/images/products/sliding_image/511859a.jpg?ts=1742805449" },
+        { name: "Clothes", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=180/app/images/products/sliding_image/511859a.jpg?ts=1742805449" },
+        { name: "Home Decor", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=180/app/images/products/sliding_image/511859a.jpg?ts=1742805449" },
+        { name: "Fitness", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=180/app/images/products/sliding_image/511859a.jpg?ts=1742805449" },
+        { name: "TV & Electronics", selected: false, image: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=180/app/images/products/sliding_image/511859a.jpg?ts=1742805449" }
       ]
     }
   ];
@@ -66,7 +66,9 @@ const GroceryApp = () => {
         <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
           <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
           <div className="text-lg md:text-xl font-bold">Banner Adds</div>
-          <div className="w-8 md:w-16"></div> {/* Placeholder for balance */}
+          <div className="w-8 md:w-16">
+            <img src="/api/placeholder/100/50" alt="Banner icon" className="w-full" />
+          </div>
         </div>
       </div>
       
@@ -84,7 +86,13 @@ const GroceryApp = () => {
                 key={idx} 
                 className="flex flex-col items-center"
               >
-                <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
+                <div className="w-full aspect-square rounded-lg mb-1 md:mb-2 overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
               </div>
             ))}
@@ -97,7 +105,9 @@ const GroceryApp = () => {
         <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
           <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
           <div className="text-lg md:text-xl font-bold">Banner Adds</div>
-          <div className="w-8 md:w-16"></div>
+          <div className="w-8 md:w-16">
+            <img src="/api/placeholder/100/50" alt="Banner icon" className="w-full" />
+          </div>
         </div>
       </div>
       
@@ -111,7 +121,13 @@ const GroceryApp = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {categories[2].items.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
+              <div className="w-full aspect-square rounded-lg mb-1 md:mb-2 overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
             </div>
           ))}
@@ -123,7 +139,10 @@ const GroceryApp = () => {
         <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
           <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
           <div className="text-lg md:text-xl font-bold">Banner Adds</div>
-          <div className="text-xs text-white">See All</div>
+          <div className="flex items-center">
+            <span className="text-xs text-white mr-2">See All</span>
+            <img src="/api/placeholder/100/50" alt="Banner icon" className="w-8 md:w-12" />
+          </div>
         </div>
       </div>
       
@@ -137,7 +156,13 @@ const GroceryApp = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {categories[3].items.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
+              <div className="w-full aspect-square rounded-lg mb-1 md:mb-2 overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
             </div>
           ))}
@@ -149,7 +174,10 @@ const GroceryApp = () => {
         <div className="bg-red-400 text-white rounded-lg flex items-center justify-between p-3 md:p-4">
           <button className="bg-white text-red-400 text-xs py-1 px-2 md:px-3 rounded-md border border-white">ORDER NOW</button>
           <div className="text-lg md:text-xl font-bold">Banner Adds</div>
-          <div className="text-xs text-white">See All</div>
+          <div className="flex items-center">
+            <span className="text-xs text-white mr-2">See All</span>
+            <img src="/api/placeholder/100/50" alt="Banner icon" className="w-8 md:w-12" />
+          </div>
         </div>
       </div>
       
@@ -163,7 +191,13 @@ const GroceryApp = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {categories[4].items.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="bg-gray-200 w-full aspect-square rounded-lg mb-1 md:mb-2"></div>
+              <div className="w-full aspect-square rounded-lg mb-1 md:mb-2 overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <p className="text-xs text-center font-medium px-1 leading-tight">{item.name}</p>
             </div>
           ))}

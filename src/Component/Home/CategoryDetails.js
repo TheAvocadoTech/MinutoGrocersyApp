@@ -10,7 +10,7 @@ const products = [
     price: 2521,
     originalPrice: 3000,
     discount: 23,
-    image: "/path/to/rice.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const products = [
     price: 2038,
     originalPrice: 2500,
     discount: 21,
-    image: "/path/to/olive-oil.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const products = [
     price: 710,
     originalPrice: 925,
     discount: 31,
-    image: "/path/to/ghee.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const products = [
     price: 2329,
     originalPrice: 3000,
     discount: 41,
-    image: "/path/to/bertolli-oil.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 5,
@@ -46,7 +46,7 @@ const products = [
     price: 3097,
     originalPrice: 4000,
     discount: 34,
-    image: "/path/to/pomace-oil.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 6,
@@ -55,7 +55,7 @@ const products = [
     price: 847,
     originalPrice: 1000,
     discount: 21,
-    image: "/path/to/gts-rice.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 1,
@@ -64,7 +64,7 @@ const products = [
     price: 2521,
     originalPrice: 3000,
     discount: 23,
-    image: "/path/to/rice.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 2,
@@ -73,7 +73,7 @@ const products = [
     price: 2038,
     originalPrice: 2500,
     discount: 21,
-    image: "/path/to/olive-oil.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 3,
@@ -82,7 +82,7 @@ const products = [
     price: 710,
     originalPrice: 925,
     discount: 31,
-    image: "/path/to/ghee.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 4,
@@ -91,7 +91,7 @@ const products = [
     price: 2329,
     originalPrice: 3000,
     discount: 41,
-    image: "/path/to/bertolli-oil.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 5,
@@ -100,7 +100,7 @@ const products = [
     price: 3097,
     originalPrice: 4000,
     discount: 34,
-    image: "/path/to/pomace-oil.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
   {
     id: 6,
@@ -109,7 +109,7 @@ const products = [
     price: 847,
     originalPrice: 1000,
     discount: 21,
-    image: "/path/to/gts-rice.jpg",
+    image: "https://cdn.zeptonow.com/production/ik-seo/tr:w-900,ar-900-900,pr-true,f-auto,q-80/cms/product_variant/9fd06b82-ae57-41f3-8f6b-b5c57be26d5e/Keshar-Kali-Wada-Kolam-Rice.jpg",
   },
 ];
 
