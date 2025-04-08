@@ -153,7 +153,7 @@ const Navbar = () => {
           <div className="flex justify-around items-center">
             {[
               { href: "/", icon: <Home size={20} />, label: "Home" },
-              { href: "/categories", icon: <Grid size={20} />, label: "Categories" },
+              { href: "/categoryDetail", icon: <Grid size={20} />, label: "Categories" },
               { 
                 href: "/cart", 
                 icon: <Utensils size={20} />, 

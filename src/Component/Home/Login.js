@@ -64,7 +64,7 @@ const LoginModal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div
         ref={modalRef}
-        className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md relative animate-fadeIn"
+        className="rounded-lg p-6 w-full max-w-md relative animate-fadeIn"
       >
         <button className="absolute top-4 right-4 text-gray-500" onClick={onClose}>
           &times;

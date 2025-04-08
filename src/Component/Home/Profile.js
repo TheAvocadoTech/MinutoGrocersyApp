@@ -235,8 +235,8 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="pt-20 mb-16 py-10 flex items-center justify-center">
-      <div className="w-[75%]  h-[85vh] border  rounded-lg shadow-md overflow-hidden bg-white">
+    <div className="pt-40 mb-16 py-28 flex items-center justify-center">
+      <div className="w-[85%]  h-[85vh] border  rounded-lg shadow-md overflow-hidden bg-white">
         <div className="flex flex-col md:flex-row">
           {/* Left Sidebar - Fixed width */}
           <div className="w-full md:w-64 bg-white border-r">
