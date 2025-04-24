@@ -3,9 +3,6 @@ import React from 'react'
 import Navbar from './Component/Home/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './Component/Home/Footer'
-
-
-
 import MainLayout from './Component/Home/MainLayout'
 import UserProfile from './Component/Home/Profile'
 import RiceOilPage from './Component/Home/CategoryDetails'
