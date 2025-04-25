@@ -173,7 +173,7 @@ const Footer = () => {
                 Get help
               </Link>
               <Link to="/add-restaurant" className="text-sm text-gray-600 hover:text-red-500 transition-colors">
-                Add your restaurant
+                Add your Store
               </Link>
               <Link to="/signup-deliver" className="text-sm text-gray-600 hover:text-red-500 transition-colors">
                 Sign up to deliver
