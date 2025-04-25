@@ -1,27 +1,46 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import MainLayout from './components/layout/MainLayout';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import ProfilePage from './pages/ProfilePage';
+import OrdersPage from './pages/OrdersPage';
+import CategoryPage from './pages/CategoryPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import NotFoundPage from './pages/NotFoundPage';
 
-import Navbar from './Component/Home/Navbar'
-import { Route, Routes } from 'react-router-dom'
-import Footer from './Component/Home/Footer'
-import MainLayout from './Component/Home/MainLayout'
-import UserProfile from './Component/Home/Profile'
-import RiceOilPage from './Component/Home/CategoryDetails'
-import ProductDetailPage from './Component/Home/ProductDetail'
-
-const App = () => {
+function App() {
   return (
-    <div>
-      <Navbar/>
-      <Routes>
-        <Route path="/" element={<MainLayout/>} />
-        <Route path="/profile" element={<UserProfile/>} />
-        <Route path="/categoryDetail" element={<RiceOilPage/>} />
-
-        <Route path="/productdetail" element={<ProductDetailPage/>} />
-      </Routes>
-      <Footer/>
-    </div>
-  )
+    <Router>
+      <AuthProvider>
+        <CartProvider>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              {/* Public Routes */}
+              <Route index element={<HomePage />} />
+              <Route path="category/:categoryId" element={<CategoryPage />} />
+              <Route path="product/:productId" element={<ProductPage />} />
+              <Route path="cart" element={<CartPage />} />
+              
+              {/* Protected Routes */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="checkout" element={<CheckoutPage />} />
+                <Route path="profile" element={<ProfilePage />} />
+                <Route path="orders" element={<OrdersPage />} />
+              </Route>
+              
+              {/* 404 Not Found */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </CartProvider>
+      </AuthProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;
