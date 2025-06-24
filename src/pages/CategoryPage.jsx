@@ -1,151 +1,186 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ShoppingCart, ChevronRight, ChevronLeft, AlertCircle, RefreshCw } from 'lucide-react';
+import { getProductsByCategory, getCategories, addToCart } from '../utils/api';
 
-// Updated categories list with new data
-const categories = [
-  { id: 1, name: 'Vegetables', icon: '🥦', slug: 'vegetables' },
-  { id: 2, name: 'Fruits', icon: '🍎', slug: 'fruits' },
-  { id: 3, name: 'Dairy', icon: '🥛', slug: 'dairy' },
-  { id: 4, name: 'Bakery', icon: '🍞', slug: 'bakery' },
-  { id: 5, name: 'Snacks', icon: '🍿', slug: 'snacks' },
-  { id: 6, name: 'Beverages', icon: '🥤', slug: 'beverages' },
-  { id: 7, name: 'Household', icon: '🧹', slug: 'household' },
-  { id: 8, name: 'Personal Care', icon: '🧴', slug: 'personal-care' },
-  { id: 9, name: 'Rice & More', icon: '🍚', slug: 'rice-more' },
-  { id: 10, name: 'Ghee', icon: '🥄', slug: 'ghee' },
-  { id: 11, name: 'Dals & Pulses', icon: '🌱', slug: 'dals-pulses' },
-  { id: 12, name: 'Oils', icon: '🫙', slug: 'oils' },
-  { id: 13, name: 'Atta & Flours', icon: '🌾', slug: 'atta-flours' },
-  { id: 14, name: 'Top Picks', icon: '⭐', slug: 'top-picks' },
-];
+const categoryIcons = {
+  'vegetables': '🥦', 'fruits': '🍎', 'dairy': '🥛', 'bakery': '🍞', 'snacks': '🍿',
+  'beverages': '🥤', 'household': '🧹', 'personal care': '🧴', 'rice': '🍚', 'ghee': '🥄',
+  'dals': '🌱', 'oils': '🫙', 'atta': '🌾', 'default': '🛒'
+};
+
+const getCategoryIcon = (name) => {
+  const n = name?.toLowerCase() || '';
+  return categoryIcons[n] || Object.entries(categoryIcons).find(([k]) => n.includes(k))?.[1] || categoryIcons.default;
+};
+
+const generateSlug = (name) => name?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || '';
+
+const fallbackCategories = [
+  { id: 'f1', name: 'Vegetables', slug: 'vegetables' },
+  { id: 'f2', name: 'Fruits', slug: 'fruits' },
+  { id: 'f3', name: 'Dairy', slug: 'dairy' },
+  { id: 'f4', name: 'Bakery', slug: 'bakery' },
+  { id: 'f5', name: 'Snacks', slug: 'snacks' },
+  { id: 'f6', name: 'Beverages', slug: 'beverages' }
+].map(cat => ({ ...cat, icon: getCategoryIcon(cat.name) }));
+
+const bannerImages = ["/banner/3D.jpg", "/home.png"];
+
+// Simple cache
+let cache = { categories: null, time: 0 };
+const CACHE_TIME = 5 * 60 * 1000;
+
+const Skeleton = ({ type = 'product' }) => (
+  <div className={`bg-white rounded-lg p-4 animate-pulse ${type === 'banner' ? 'h-48' : 'h-64'}`}>
+    <div className={`bg-gray-200 rounded ${type === 'banner' ? 'h-full' : 'h-32 mb-3'}`}></div>
+    {type === 'product' && (
+      <>
+        <div className="h-4 bg-gray-200 rounded mb-2"></div>
+        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+      </>
+    )}
+  </div>
+);
 
 const CategoryPage = () => {
   const { slug } = useParams();
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
-  const [showCategoriesMobile, setShowCategoriesMobile] = useState(false);
-  
-  // Banner images for carousel
-  const bannerImages = [
-    "/banner/3D.jpg",
-    "/home.png",
-    "/banner/3D.jpg",
-    "/home.png"
-  ];
-  
-  // Find the active category based on slug
-  const activeCategory = categories.find(cat => cat.slug === slug) || categories[13]; // Default to Top Picks
+  const [state, setState] = useState({
+    products: [],
+    categories: [],
+    loading: true,
+    error: null,
+    bannerIndex: 0,
+    showMobileCategories: false,
+    addingToCart: {}
+  });
 
-  useEffect(() => {
-    // This would be replaced with actual API calls based on slug
-    const fetchCategoryProducts = () => {
-      // Simulate API delay
-      setTimeout(() => {
-        // Mock data for demonstration
-        const generateMockProducts = (count) => {
-          const mockProducts = [];
-          for (let i = 1; i <= count; i++) {
-            const basePrice = Math.floor(Math.random() * 1500) + 100; // Base price in INR
-            const discountPercentage = Math.floor(Math.random() * 30 + 10);
-            const discountedPrice = Math.floor(basePrice * (1 - discountPercentage/100));
-            
-            mockProducts.push({
-              id: i,
-              name: `${activeCategory.name} Product ${i}`,
-              price: basePrice,
-              discountedPrice: discountedPrice,
-              discountPercentage: discountPercentage,
-              image: '/assets/product-placeholder.jpg',
-              unit: ['kg', 'pack', 'dozen', 'liter'][Math.floor(Math.random() * 4)],
-              inStock: Math.random() > 0.1 // 90% of products in stock
-            });
-          }
-          return mockProducts;
-        };
+  const updateState = (updates) => setState(prev => ({ ...prev, ...updates }));
 
-        setProducts(generateMockProducts(20));
-        setIsLoading(false);
-      }, 800);
-    };
+  const activeCategory = state.categories.find(cat => cat.slug === slug) || {
+    name: slug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Products',
+    icon: getCategoryIcon(slug),
+    slug: slug || 'products'
+  };
 
-    fetchCategoryProducts();
-    // Hide mobile categories menu when changing categories
-    setShowCategoriesMobile(false);
-  }, [slug, activeCategory.name]);
+  const fetchCategories = useCallback(async () => {
+    if (cache.categories && Date.now() - cache.time < CACHE_TIME) {
+      updateState({ categories: cache.categories });
+      return;
+    }
 
-  // Banner carousel auto-rotation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBannerIndex((prevIndex) => 
-        prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000); // Change banner every 5 seconds
-    
-    return () => clearInterval(interval);
+    try {
+      const response = await getCategories({ limit: 50 });
+      const categories = response.data?.categories?.map(cat => ({
+        id: cat._id,
+        name: cat.name,
+        icon: getCategoryIcon(cat.name),
+        slug: generateSlug(cat.name)
+      })) || fallbackCategories;
+      
+      cache = { categories, time: Date.now() };
+      updateState({ categories });
+    } catch (err) {
+      console.error('Categories error:', err);
+      updateState({ categories: fallbackCategories });
+    }
   }, []);
 
-  const nextBanner = () => {
-    setCurrentBannerIndex((prevIndex) => 
-      prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-    );
+  const fetchProducts = useCallback(async (categorySlug) => {
+    if (!categorySlug) return;
+    
+    updateState({ loading: true, error: null });
+    
+    try {
+      // Find the category name from slug to match with backend
+      const category = state.categories.find(cat => cat.slug === categorySlug);
+      const categoryName = category?.name || categorySlug;
+      
+      console.log('Fetching products for category:', categoryName);
+      
+      const response = await getProductsByCategory(categoryName, { limit: 50 });
+      
+      console.log('API Response:', response.data);
+      
+      // Handle backend response structure - items come from backend as 'items' array
+      const items = response.data?.items || response.data?.products || [];
+      
+      console.log('Items received:', items);
+      
+      const products = items.map(item => ({
+        id: item._id,
+        name: item.name,
+        price: item.price?.mrp || 0,
+        discountedPrice: item.price?.sellingPrice || item.price?.mrp || 0,
+        discountPercentage: item.price?.discountPercent || 0,
+        image: item.images?.[0]?.url || '/banner/3D.jpg',
+        unit: `${item.unit?.quantity || 1} ${item.unit?.unitType || 'piece'}`,
+        inStock: item.isAvailable && item.stock > 0,
+        brand: item.brand,
+        description: item.description,
+        category: item.category,
+        subcategory: item.subcategory
+      }));
+      
+      console.log('Processed products:', products);
+      
+      updateState({ products, loading: false });
+    } catch (err) {
+      console.error('Products error:', err);
+      updateState({ 
+        error: err.response?.data?.message || 'Failed to load products',
+        products: [],
+        loading: false 
+      });
+    }
+  }, [state.categories]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  useEffect(() => {
+    if (slug && state.categories.length > 0) {
+      fetchProducts(slug);
+    } else if (!slug) {
+      updateState({ loading: false });
+    }
+  }, [slug, state.categories, fetchProducts]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateState({ bannerIndex: (state.bannerIndex + 1) % bannerImages.length });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [state.bannerIndex]);
+
+  const handleAddToCart = async (product) => {
+    updateState({ addingToCart: { ...state.addingToCart, [product.id]: true } });
+    try {
+      await addToCart({ productId: product.id, quantity: 1, price: product.discountedPrice });
+      console.log('Product added to cart:', product.name);
+    } catch (err) {
+      console.error('Add to cart error:', err);
+    } finally {
+      updateState({ addingToCart: { ...state.addingToCart, [product.id]: false } });
+    }
   };
 
-  const prevBanner = () => {
-    setCurrentBannerIndex((prevIndex) => 
-      prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1
-    );
+  const handleRetry = () => {
+    if (slug) {
+      fetchProducts(slug);
+    } else {
+      fetchCategories();
+    }
   };
 
-  const toggleCategoriesMobile = () => {
-    setShowCategoriesMobile(!showCategoriesMobile);
-  };
-
-  // Loading state with skeleton UI
-  if (isLoading) {
+  if (state.loading) {
     return (
-      <div className="bg-gray-50 min-h-screen pb-10">
-        {/* Banner skeleton */}
-        <div className="max-w-screen-xl mx-auto px-4 mt-4 mb-6">
-          <div className="relative h-40 md:h-64 rounded-lg overflow-hidden bg-gray-200 animate-pulse"></div>
-        </div>
-
-        <div className="max-w-screen-xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row">
-            {/* Sidebar skeleton */}
-            <div className="w-full md:w-56 flex-shrink-0 bg-white mb-4 md:mb-0 md:mr-4 rounded-lg shadow-sm p-4 hidden md:block">
-              <div className="mb-4 h-6 bg-gray-200 rounded animate-pulse w-3/4"></div>
-              <div className="space-y-2">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="flex items-center p-2 rounded-lg">
-                    <div className="w-8 h-8 bg-gray-200 rounded-md animate-pulse mr-3"></div>
-                    <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Content skeleton */}
-            <div className="flex-grow">
-              <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-                <div className="h-6 bg-gray-200 rounded animate-pulse w-1/2 mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
-              </div>
-              
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                {[...Array(8)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-lg overflow-hidden shadow-sm h-64">
-                    <div className="aspect-square bg-gray-200 animate-pulse"></div>
-                    <div className="p-3">
-                      <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4 mb-2"></div>
-                      <div className="h-4 bg-gray-200 rounded animate-pulse w-1/2 mb-2"></div>
-                      <div className="h-6 bg-gray-200 rounded animate-pulse w-full mt-2"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <div className="bg-gray-50 min-h-screen p-4">
+        <div className="max-w-6xl mx-auto">
+          <Skeleton type="banner" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            {[...Array(8)].map((_, i) => <Skeleton key={i} />)}
           </div>
         </div>
       </div>
@@ -153,181 +188,165 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-10">
-      {/* Banner carousel section */}
-      <div className="max-w-screen-xl mx-auto px-4 mt-4 mb-6">
-        <div className="relative h-40 sm:h-48 md:h-64 rounded-lg overflow-hidden shadow">
+    <div className="bg-gray-50 min-h-screen">
+      <div className="max-w-6xl mx-auto p-4">
+        {/* Banner */}
+        <div className="relative h-48 rounded-lg overflow-hidden mb-6">
           <img 
-            src={bannerImages[currentBannerIndex]} 
+            src={bannerImages[state.bannerIndex]} 
             alt="Banner" 
             className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "/assets/images/default-banner.jpg";
-            }}
+            onError={(e) => { e.target.src = "/banner/3D.jpg"; }}
           />
-          
-          {/* Banner navigation controls */}
           <button 
-            onClick={prevBanner}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-1 shadow-md text-gray-800"
-            aria-label="Previous banner"
+            onClick={() => updateState({ bannerIndex: (state.bannerIndex - 1 + bannerImages.length) % bannerImages.length })}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} />
           </button>
-          
           <button 
-            onClick={nextBanner}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-1 shadow-md text-gray-800"
-            aria-label="Next banner"
+            onClick={() => updateState({ bannerIndex: (state.bannerIndex + 1) % bannerImages.length })}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} />
           </button>
-          
-          {/* Banner navigation dots */}
-          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {bannerImages.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  currentBannerIndex === index ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'
-                }`}
-                onClick={() => setCurrentBannerIndex(index)}
-                aria-label={`Go to banner ${index + 1}`}
-              />
-            ))}
+        </div>
+
+        {/* Error */}
+        {state.error && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4 flex items-center">
+            <AlertCircle className="text-yellow-600 mr-2" size={20} />
+            <span className="text-yellow-800 flex-grow">{state.error}</span>
+            <button 
+              onClick={handleRetry} 
+              className="text-yellow-600 hover:text-yellow-800 ml-2"
+              title="Retry"
+            >
+              <RefreshCw size={16} />
+            </button>
           </div>
-        </div>
-      </div>
+        )}
 
-      <div className="max-w-screen-xl mx-auto px-4">
-        {/* Mobile category toggle button */}
-        <div className="md:hidden mb-4">
-          <button 
-            onClick={toggleCategoriesMobile}
-            className="w-full py-3 px-4 bg-white rounded-lg shadow-sm flex justify-between items-center text-left"
-          >
-            <div className="flex items-center">
-              <span className="text-xl mr-2">{activeCategory.icon}</span>
-              <span className="font-medium text-gray-800">{activeCategory.name}</span>
-            </div>
-            <ChevronRight className={`text-gray-500 transition-transform ${showCategoriesMobile ? 'rotate-90' : ''}`} size={20} />
-          </button>
-        </div>
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Mobile category toggle */}
+          <div className="md:hidden">
+            <button 
+              onClick={() => updateState({ showMobileCategories: !state.showMobileCategories })}
+              className="w-full bg-white rounded-lg p-3 flex justify-between items-center"
+            >
+              <div className="flex items-center">
+                <span className="text-xl mr-2">{activeCategory.icon}</span>
+                <span className="font-medium">{activeCategory.name}</span>
+              </div>
+              <ChevronRight className={`transition-transform ${state.showMobileCategories ? 'rotate-90' : ''}`} size={20} />
+            </button>
+          </div>
 
-        <div className="flex flex-col md:flex-row">
-          {/* Left sidebar for categories - with mobile version */}
-          <div className={`${showCategoriesMobile ? 'block' : 'hidden'} md:block w-full md:w-56 flex-shrink-0 bg-white mb-4 md:mb-0 md:mr-4 rounded-lg shadow-sm overflow-hidden`}>
-            <div className="p-4 border-b">
-              <h2 className="font-semibold text-lg text-gray-800">Categories</h2>
-            </div>
-            <div className="max-h-96 md:max-h-screen overflow-y-auto p-3">
-              {categories.map((category) => (
+          {/* Categories sidebar */}
+          <div className={`${state.showMobileCategories ? 'block' : 'hidden'} md:block w-full md:w-64 bg-white rounded-lg p-4`}>
+            <h2 className="font-semibold text-lg mb-4">Categories</h2>
+            <div className="space-y-2">
+              {state.categories.map((category) => (
                 <Link 
                   key={category.id} 
                   to={`/category/${category.slug}`}
-                  className={`flex items-center p-2 rounded-lg transition-all hover:translate-x-1 ${
-                    category.slug === slug 
-                      ? 'bg-green-50 text-green-700 border-l-4 border-green-500' 
-                      : 'hover:bg-gray-50 text-gray-700'
+                  className={`flex items-center p-2 rounded-lg transition-colors ${
+                    category.slug === slug ? 'bg-green-50 text-green-700' : 'hover:bg-gray-50'
                   }`}
                 >
-                  <div className={`w-8 h-8 flex items-center justify-center mr-3 ${
-                    category.slug === slug ? 'bg-green-100' : 'bg-gray-100'
-                  } rounded-md`}>
-                    <span className="text-xl">{category.icon}</span>
-                  </div>
-                  <span className={`text-sm ${category.slug === slug ? 'font-medium' : ''}`}>
-                    {category.name}
-                  </span>
+                  <span className="text-xl mr-3">{category.icon}</span>
+                  <span className="text-sm">{category.name}</span>
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Main content area - grid of products */}
+          {/* Products */}
           <div className="flex-grow">
-            <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-              <h1 className="text-xl font-semibold text-gray-800 flex items-center">
+            <div className="bg-white p-4 rounded-lg mb-4">
+              <h1 className="text-xl font-semibold flex items-center">
                 <span className="text-2xl mr-2">{activeCategory.icon}</span>
-                <span>{activeCategory.name}</span>
+                {activeCategory.name}
               </h1>
-              <p className="text-sm text-gray-600 mt-1">
-                Browse our selection of {activeCategory.name.toLowerCase()} ({products.length} items)
-              </p>
+              <p className="text-sm text-gray-600 mt-1">{state.products.length} items available</p>
             </div>
             
-            {products.length === 0 ? (
+            {state.products.length === 0 && !state.loading ? (
               <div className="bg-white rounded-lg p-8 text-center">
                 <div className="text-5xl mb-4">🔍</div>
                 <h3 className="text-xl font-medium mb-2">No products found</h3>
-                <p className="text-gray-600">We couldn't find any products in this category right now.</p>
+                <p className="text-gray-600 mb-4">
+                  {state.error ? 'There was an error loading products.' : 'This category is currently empty.'}
+                </p>
+                <button 
+                  onClick={handleRetry}
+                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Try Again
+                </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                {products.map((product) => (
-                  <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {state.products.map((product) => (
+                  <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     <Link to={`/product/${product.id}`} className="block">
-                      <div className="aspect-square relative overflow-hidden">
+                      <div className="aspect-square relative">
                         <img 
                           src={product.image} 
                           alt={product.name} 
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "/banner/3D.jpg";
-                          }}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform"
+                          onError={(e) => { e.target.src = "/banner/3D.jpg"; }}
                         />
                         {product.discountPercentage > 0 && (
-                          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold rounded-full w-10 h-10 flex items-center justify-center shadow">
-                            {product.discountPercentage}%<br/>OFF
+                          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold rounded-full w-10 h-10 flex items-center justify-center">
+                            {product.discountPercentage}%
                           </div>
                         )}
                         {!product.inStock && (
-                          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <span className="bg-white/90 px-2 py-1 rounded text-xs font-semibold text-red-600">OUT OF STOCK</span>
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                            <span className="bg-white px-2 py-1 rounded text-xs font-semibold text-red-600">OUT OF STOCK</span>
                           </div>
                         )}
                       </div>
                     </Link>
                     <div className="p-3">
-                      <Link to={`/product/${product.id}`} className="block">
-                        <h3 className="text-sm font-medium text-gray-900 line-clamp-2 h-10 hover:text-green-700">{product.name}</h3>
-                        <div className="mt-2 flex items-baseline">
-                          <span className="text-sm font-medium text-gray-900">
-                            ₹{product.discountedPrice}
-                          </span>
+                      <Link to={`/product/${product.id}`}>
+                        <h3 className="text-sm font-medium line-clamp-2 h-10 hover:text-green-700">{product.name}</h3>
+                        {product.brand && (
+                          <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
+                        )}
+                        <div className="mt-2">
+                          <span className="text-sm font-medium">₹{product.discountedPrice}</span>
                           {product.discountPercentage > 0 && (
-                            <span className="ml-2 text-xs text-gray-500 line-through">
-                              ₹{product.price}
-                            </span>
+                            <span className="ml-2 text-xs text-gray-500 line-through">₹{product.price}</span>
                           )}
-                          <span className="ml-1 text-xs text-gray-500">
-                            /{product.unit}
-                          </span>
+                          <span className="ml-1 text-xs text-gray-500">/{product.unit}</span>
                         </div>
                       </Link>
                       <button 
-                        className={`mt-3 w-full rounded py-1.5 text-xs font-medium flex items-center justify-center transition-colors ${
+                        onClick={() => handleAddToCart(product)}
+                        disabled={!product.inStock || state.addingToCart[product.id]}
+                        className={`mt-3 w-full py-2 text-xs font-medium rounded flex items-center justify-center transition-colors ${
                           product.inStock 
-                            ? 'bg-green-500 hover:bg-green-600 text-white' 
+                            ? (state.addingToCart[product.id] ? 'bg-gray-400 text-white' : 'bg-green-500 hover:bg-green-600 text-white')
                             : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                         }`}
-                        disabled={!product.inStock}
                       >
-                        <ShoppingCart size={14} className="mr-1" />
-                        {product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
+                        {state.addingToCart[product.id] ? (
+                          <>
+                            <RefreshCw size={14} className="mr-1 animate-spin" />
+                            ADDING...
+                          </>
+                        ) : (
+                          <>
+                            <ShoppingCart size={14} className="mr-1" />
+                            {product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
+                          </>
+                        )}
                       </button>
                     </div>
                   </div>
                 ))}
-              </div>
-            )}
-            
-            {/* Show count at the bottom */}
-            {products.length > 0 && (
-              <div className="mt-6 text-center text-sm text-gray-600">
-                Showing {products.length} products in {activeCategory.name}
               </div>
             )}
           </div>
