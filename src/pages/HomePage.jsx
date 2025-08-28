@@ -240,6 +240,51 @@ const HomePage = () => {
         discountPercentage: 20,
         unit: 'pack'
       },
+        { 
+        id: 13, 
+        name: 'Detergent', 
+        price: 9.99, 
+        image: '/assets/images/detergent.jpg',
+        discountedPrice: 7.99,
+        discountPercentage: 20,
+        unit: 'pack'
+      },
+      { 
+        id: 14, 
+        name: 'Detergent', 
+        price: 9.99, 
+        image: '/assets/images/detergent.jpg',
+        discountedPrice: 7.99,
+        discountPercentage: 20,
+        unit: 'pack'
+      },
+      { 
+        id: 14, 
+        name: 'Detergent', 
+        price: 9.99, 
+        image: '/assets/images/detergent.jpg',
+        discountedPrice: 7.99,
+        discountPercentage: 20,
+        unit: 'pack'
+      },
+      { 
+        id: 15, 
+        name: 'Detergent', 
+        price: 9.99, 
+        image: '/assets/images/detergent.jpg',
+        discountedPrice: 7.99,
+        discountPercentage: 20,
+        unit: 'pack'
+      },
+      { 
+        id: 16, 
+        name: 'Detergent', 
+        price: 9.99, 
+        image: '/assets/images/detergent.jpg',
+        discountedPrice: 7.99,
+        discountPercentage: 20,
+        unit: 'pack'
+      },
     ];
 
     // Simulate API delay

@@ -86,54 +86,105 @@ const CategoryPage = () => {
     }
   }, []);
 
-  const fetchProducts = useCallback(async (categorySlug) => {
-    if (!categorySlug) return;
+ const fetchProducts = useCallback(async (categorySlug) => {
+  if (!categorySlug) return;
+  
+  updateState({ loading: true, error: null });
+  
+  try {
+    // Find the category to get both name and ID
+    const category = state.categories.find(cat => cat.slug === categorySlug);
     
-    updateState({ loading: true, error: null });
+    console.log('Found category:', category);
+    console.log('Category slug:', categorySlug);
     
-    try {
-      // Find the category name from slug to match with backend
-      const category = state.categories.find(cat => cat.slug === categorySlug);
-      const categoryName = category?.name || categorySlug;
-      
-      console.log('Fetching products for category:', categoryName);
-      
-      const response = await getProductsByCategory(categoryName, { limit: 50 });
-      
-      console.log('API Response:', response.data);
-      
-      // Handle backend response structure - items come from backend as 'items' array
-      const items = response.data?.items || response.data?.products || [];
-      
-      console.log('Items received:', items);
-      
-      const products = items.map(item => ({
-        id: item._id,
-        name: item.name,
-        price: item.price?.mrp || 0,
-        discountedPrice: item.price?.sellingPrice || item.price?.mrp || 0,
-        discountPercentage: item.price?.discountPercent || 0,
-        image: item.images?.[0]?.url || '/banner/3D.jpg',
-        unit: `${item.unit?.quantity || 1} ${item.unit?.unitType || 'piece'}`,
-        inStock: item.isAvailable && item.stock > 0,
-        brand: item.brand,
-        description: item.description,
-        category: item.category,
-        subcategory: item.subcategory
-      }));
-      
-      console.log('Processed products:', products);
-      
-      updateState({ products, loading: false });
-    } catch (err) {
-      console.error('Products error:', err);
-      updateState({ 
-        error: err.response?.data?.message || 'Failed to load products',
-        products: [],
-        loading: false 
-      });
+    let response;
+    
+    // Try different approaches based on your backend
+    if (category?.id) {
+      // Try with category ID first
+      console.log('Trying with category ID:', category.id);
+      response = await getProductsByCategory(category.id);
+    } else if (category?.name) {
+      // Try with category name
+      console.log('Trying with category name:', category.name);
+      response = await getProductsByCategory(category.name);
+    } else {
+      // Fallback to slug
+      console.log('Trying with category slug:', categorySlug);
+      response = await getProductsByCategory(categorySlug);
     }
-  }, [state.categories]);
+    
+    console.log('Full API Response:', response);
+    console.log('Response data:', response.data);
+    console.log('Response status:', response.status);
+    
+    // Handle different possible response structures
+    let items = [];
+    
+    if (response.data) {
+      // Try different possible property names
+      items = response.data.items || 
+              response.data.products || 
+              response.data.data ||
+              response.data.result ||
+              (Array.isArray(response.data) ? response.data : []);
+    }
+    
+    console.log('Extracted items:', items);
+    console.log('Items count:', items.length);
+    
+    if (!Array.isArray(items)) {
+      console.error('Items is not an array:', typeof items, items);
+      items = [];
+    }
+    
+    const products = items.map(item => {
+      console.log('Processing item:', item);
+      return {
+        id: item._id || item.id,
+        name: item.name || 'Unnamed Product',
+        price: item.price?.mrp || item.mrp || item.originalPrice || 0,
+        discountedPrice: item.price?.sellingPrice || item.sellingPrice || item.price?.mrp || item.mrp || item.price || 0,
+        discountPercentage: item.price?.discountPercent || item.discountPercent || 0,
+        image: item.images?.[0]?.url || item.image || item.imageUrl || '/banner/3D.jpg',
+        unit: `${item.unit?.quantity || item.quantity || 1} ${item.unit?.unitType || item.unitType || item.unit || 'piece'}`,
+        inStock: item.isAvailable !== false && (item.stock > 0 || item.inStock !== false),
+        brand: item.brand || '',
+        description: item.description || '',
+        category: item.category || categorySlug,
+        subcategory: item.subcategory || ''
+      };
+    });
+    
+    console.log('Final processed products:', products);
+    
+    updateState({ products, loading: false });
+    
+  } catch (err) {
+    console.error('Products fetch error:', err);
+    console.error('Error response:', err.response);
+    console.error('Error message:', err.message);
+    
+    let errorMessage = 'Failed to load products';
+    
+    if (err.response) {
+      // Server responded with error
+      errorMessage = err.response.data?.message || 
+                    err.response.data?.error || 
+                    `Server error: ${err.response.status}`;
+    } else if (err.request) {
+      // Network error
+      errorMessage = 'Network error. Please check your connection.';
+    }
+    
+    updateState({ 
+      error: errorMessage,
+      products: [],
+      loading: false 
+    });
+  }
+}, [state.categories]);
 
   useEffect(() => {
     fetchCategories();
