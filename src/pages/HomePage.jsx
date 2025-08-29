@@ -169,7 +169,7 @@ const HomePage = () => {
       //       price: 9.99, 
       //       image: '/assets/images/detergent.jpg',
       //       discountedPrice: 7.99,
-      //       discountPercentage: 20,
+      //       discountPercentage: 20,Minutos: Freshness Delivered, Fast and Local
       //       unit: 'pack'
       //     },
       //     { 

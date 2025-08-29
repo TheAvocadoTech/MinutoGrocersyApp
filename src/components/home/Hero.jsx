@@ -36,7 +36,7 @@ const Hero = () => {
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
                 </svg>
-                30 Min Delivery
+                10 Min Delivery
               </span>
               <span className="flex items-center mr-6">
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +63,7 @@ const Hero = () => {
               {/* Main image with shadow */}
               <div className="relative bg-white bg-opacity-10 rounded-3xl p-2 sm:p-3 shadow-2xl">
                 <img 
-                  src="/delivery-person.png" 
+                  src="https://imgs.search.brave.com/63uFw-Bv8OtLVlf5YVoCwjkttsxiqyISeE6uJy8Udow/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMjEvRm9v/ZC1EZWxpdmVyeS1Q/TkctSXNvbGF0ZWQt/Q2xpcGFydC5wbmc" 
                   alt="Delivery person with groceries" 
                   className="relative z-10 max-w-full h-auto rounded-2xl"
                   style={{ maxWidth: "500px" }}
