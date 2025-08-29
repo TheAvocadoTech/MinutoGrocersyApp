@@ -19,7 +19,7 @@ const ProductPage = () => {
         id: productId,
         name: 'Amul Gold Full Cream Fresh Milk',
         price: 33,
-        image: '/assets/images/milk.jpg',
+        image: 'https://imgs.search.brave.com/yUaM5UCyCZxBA-fv3i2uihcYNnu71reY5SscnGNrU9I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aWlt/Zy50aXN0YXRpYy5j/b20vZnAvMS8wMDcv/NTE4L2Jlc3QtcHJp/Y2UtYW11bC1nb2xk/LW1pbGt5LW5hdHVy/YWwtZnJlc2gtcGFz/dGV1cml6ZWQtZnVs/bC1jcmVhbS1taWxr/LTAyMC5qcGc',
         rating: 5,
         reviews: 5,
         brand: 'Amul',

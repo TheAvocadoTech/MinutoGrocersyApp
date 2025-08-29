@@ -24,7 +24,7 @@ const HomePage = () => {
             id: 1, 
             name: 'Banana', 
             price: 12.99, 
-            image: '/assets/images/banana.jpg',
+            image: 'https://imgs.search.brave.com/MIJQuWYBouDOHautrOPDHXpr-YK_WeRey8Z7iAx8kwg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNS8w/MS8yNy8xOC8zMi9i/YW5hbmFzLTYxNDA5/MF82NDAuanBn',
             discountedPrice: 9.99,
             discountPercentage: 23,
             unit: 'dozen'
@@ -33,7 +33,7 @@ const HomePage = () => {
             id: 2, 
             name: 'Apple', 
             price: 8.99, 
-            image: '/assets/images/apple.jpg',
+            image: 'https://imgs.search.brave.com/SOuDD8tBCCD3uypPovFHx0DsnAil9SeY3OlLQaWDyW8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9hcHBs/ZS1mcnVpdC1hcHBs/ZXMtZnJ1aXRzLXJl/ZC1ncmVlbi1zbGlj/ZS1oYWxmLWlzb2xh/dGVkLXdoaXRlLWJh/Y2tncm91bmQtNzEz/MjExMzIuanBn',
             discountedPrice: 6.99,
             discountPercentage: 22,
             unit: 'kg'
@@ -42,7 +42,7 @@ const HomePage = () => {
             id: 3, 
             name: 'Tomato', 
             price: 5.99, 
-            image: '/assets/images/tomato.jpg',
+            image: 'https://imgs.search.brave.com/hjqISiMfw7YmyqsrH1Gup1CUca_VvhrPBg9_KVQyK8w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZnJlZXBuZ2xvZ29z/LmNvbS91cGxvYWRz/L3RvbWF0by1wbmcv/dG9tYXRvLWdsb3Jp/b3NvLWl0YWxpYW4t/bWFya2V0LTM1LnBu/Zw',
             discountedPrice: 4.99,
             discountPercentage: 17,
             unit: 'kg'
@@ -51,7 +51,7 @@ const HomePage = () => {
             id: 4, 
             name: 'Potato', 
             price: 3.99, 
-            image: '/assets/images/potato.jpg',
+            image: 'https://imgs.search.brave.com/lwuZMKhe_th_9ZkNTX_JBSTaWTs7KGojh88EcXk0okg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTEy/NzgyMjI5OC9waG90/by9hLXBpbGUtb2Yt/cG90YXRvZXMtb24t/YS10YWJsZS10b3Au/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PTdfcUpLUERSbzkw/Q3BLaXhvOWVqSEV6/SXNLbkhaTW5sQ2dI/V196Q3c2U0k9',
             discountedPrice: 2.99,
             discountPercentage: 25,
             unit: 'kg'
@@ -63,228 +63,228 @@ const HomePage = () => {
         name: 'Dairy & Bakery', 
         icon: '🥛',
         products: [
-          { 
-            id: 5, 
-            name: 'Milk', 
-            price: 4.99, 
-            image: '/assets/images/milk.jpg',
-            discountedPrice: 3.99,
-            discountPercentage: 20,
-            unit: 'liter'
-          },
+        //   { 
+        //     id: 5, 
+        //     name: 'Milk', 
+        //     price: 4.99, 
+        //     image: '/assets/images/milk.jpg',
+        //     discountedPrice: 3.99,
+        //     discountPercentage: 20,
+        //     unit: 'liter'
+        //   }
           { 
             id: 6, 
             name: 'Bread', 
             price: 2.99, 
-            image: '/assets/images/bread.jpg',
+            image: 'https://imgs.search.brave.com/oVn5NDcartBhBZj8nQnL7s-MM7uTjZWQzU4EATmPRJs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Z290ZXNvLmNvbS9i/bG9nL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzAyL29ubGlu/ZS1ncm9jZXJ5LXN0/b3JlLnBuZw',
             discountedPrice: 2.49,
             discountPercentage: 17,
             unit: 'loaf'
           }
         ]
       },
-      { 
-        id: 3, 
-        name: 'Beverages', 
-        icon: '🥤',
-        products: [
-          { 
-            id: 7, 
-            name: 'Orange Juice', 
-            price: 3.99, 
-            image: '/assets/images/orange-juice.jpg',
-            discountedPrice: 2.99,
-            discountPercentage: 25,
-            unit: 'liter'
-          },
-          { 
-            id: 8, 
-            name: 'Cola', 
-            price: 1.99, 
-            image: '/assets/images/cola.jpg',
-            discountedPrice: 1.49,
-            discountPercentage: 25,
-            unit: 'bottle'
-          }
-        ]
-      },
-      { 
-        id: 4, 
-        name: 'Snacks & Packaged Foods', 
-        icon: '🍪',
-        products: [
-          { 
-            id: 9, 
-            name: 'Cookies', 
-            price: 4.99, 
-            image: '/assets/images/cookies.jpg',
-            discountedPrice: 3.99,
-            discountPercentage: 20,
-            unit: 'pack'
-          },
-          { 
-            id: 10, 
-            name: 'Chips', 
-            price: 2.99, 
-            image: '/assets/images/chips.jpg',
-            discountedPrice: 2.49,
-            discountPercentage: 17,
-            unit: 'pack'
-          }
-        ]
-      },
-      { 
-        id: 5, 
-        name: 'Personal Care', 
-        icon: '🧴',
-        products: [
-          { 
-            id: 11, 
-            name: 'Shampoo', 
-            price: 7.99, 
-            image: '/assets/images/shampoo.jpg',
-            discountedPrice: 5.99,
-            discountPercentage: 25,
-            unit: 'bottle'
-          },
-          { 
-            id: 12, 
-            name: 'Soap', 
-            price: 2.99, 
-            image: '/assets/images/soap.jpg',
-            discountedPrice: 1.99,
-            discountPercentage: 33,
-            unit: 'bar'
-          }
-        ]
-      },
-      { 
-        id: 6, 
-        name: 'Household Essentials', 
-        icon: '🧹',
-        products: [
-          { 
-            id: 13, 
-            name: 'Detergent', 
-            price: 9.99, 
-            image: '/assets/images/detergent.jpg',
-            discountedPrice: 7.99,
-            discountPercentage: 20,
-            unit: 'pack'
-          },
-          { 
-            id: 14, 
-            name: 'Tissues', 
-            price: 3.99, 
-            image: '/assets/images/tissues.jpg',
-            discountedPrice: 2.99,
-            discountPercentage: 25,
-            unit: 'pack'
-          }
-        ]
-      }
+      // { 
+      //   id: 3, 
+      //   name: 'Beverages', 
+      //   icon: '🥤',
+      //   products: [
+      //     { 
+      //       id: 7, 
+      //       name: 'Orange Juice', 
+      //       price: 3.99, 
+      //       image: '/assets/images/orange-juice.jpg',
+      //       discountedPrice: 2.99,
+      //       discountPercentage: 25,
+      //       unit: 'liter'
+      //     },
+      //     { 
+      //       id: 8, 
+      //       name: 'Cola', 
+      //       price: 1.99, 
+      //       image: '/assets/images/cola.jpg',
+      //       discountedPrice: 1.49,
+      //       discountPercentage: 25,
+      //       unit: 'bottle'
+      //     }
+      //   ]
+      // },
+      // { 
+      //   id: 4, 
+      //   name: 'Snacks & Packaged Foods', 
+      //   icon: '🍪',
+      //   products: [
+      //     { 
+      //       id: 9, 
+      //       name: 'Cookies', 
+      //       price: 4.99, 
+      //       image: '/assets/images/cookies.jpg',
+      //       discountedPrice: 3.99,
+      //       discountPercentage: 20,
+      //       unit: 'pack'
+      //     },
+      //     { 
+      //       id: 10, 
+      //       name: 'Chips', 
+      //       price: 2.99, 
+      //       image: '/assets/images/chips.jpg',
+      //       discountedPrice: 2.49,
+      //       discountPercentage: 17,
+      //       unit: 'pack'
+      //     }
+      //   ]
+      // },
+      // { 
+      //   id: 5, 
+      //   name: 'Personal Care', 
+      //   icon: '🧴',
+      //   products: [
+      //     { 
+      //       id: 11, 
+      //       name: 'Shampoo', 
+      //       price: 7.99, 
+      //       image: '/assets/images/shampoo.jpg',
+      //       discountedPrice: 5.99,
+      //       discountPercentage: 25,
+      //       unit: 'bottle'
+      //     },
+      //     { 
+      //       id: 12, 
+      //       name: 'Soap', 
+      //       price: 2.99, 
+      //       image: '/assets/images/soap.jpg',
+      //       discountedPrice: 1.99,
+      //       discountPercentage: 33,
+      //       unit: 'bar'
+      //     }
+      //   ]
+      // },
+      // { 
+      //   id: 6, 
+      //   name: 'Household Essentials', 
+      //   icon: '🧹',
+      //   products: [
+      //     { 
+      //       id: 13, 
+      //       name: 'Detergent', 
+      //       price: 9.99, 
+      //       image: '/assets/images/detergent.jpg',
+      //       discountedPrice: 7.99,
+      //       discountPercentage: 20,
+      //       unit: 'pack'
+      //     },
+      //     { 
+      //       id: 14, 
+      //       name: 'Tissues', 
+      //       price: 3.99, 
+      //       image: '/assets/images/tissues.jpg',
+      //       discountedPrice: 2.99,
+      //       discountPercentage: 25,
+      //       unit: 'pack'
+      //     }
+      //   ]
+      // }
     ];
 
     const mockBestSellers = [
-      { 
-        id: 1, 
-        name: 'Banana', 
-        price: 12.99, 
-        image: '/assets/images/banana.jpg',
-        discountedPrice: 9.99,
-        discountPercentage: 23,
-        unit: 'dozen'
-      },
+      // { 
+      //   id: 1, 
+      //   name: 'Banana', 
+      //   price: 12.99, 
+      //   image: 'https://imgs.search.brave.com/MIJQuWYBouDOHautrOPDHXpr-YK_WeRey8Z7iAx8kwg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNS8w/MS8yNy8xOC8zMi9i/YW5hbmFzLTYxNDA5/MF82NDAuanBn',
+      //   discountedPrice: 9.99,
+      //   discountPercentage: 23,
+      //   unit: 'dozen'
+      // },
       { 
         id: 5, 
         name: 'Milk', 
         price: 4.99, 
-        image: '/assets/images/milk.jpg',
+        image: 'https://tse4.mm.bing.net/th/id/OIP.9LZU9dm7WCz7Du4EoSvyiwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
         discountedPrice: 3.99,
         discountPercentage: 20,
         unit: 'liter'
       },
-      { 
-        id: 7, 
-        name: 'Orange Juice', 
-        price: 3.99, 
-        image: '/assets/images/orange-juice.jpg',
-        discountedPrice: 2.99,
-        discountPercentage: 25,
-        unit: 'liter'
-      },
-      { 
-        id: 9, 
-        name: 'Cookies', 
-        price: 4.99, 
-        image: '/assets/images/cookies.jpg',
-        discountedPrice: 3.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
-      { 
-        id: 11, 
-        name: 'Shampoo', 
-        price: 7.99, 
-        image: '/assets/images/shampoo.jpg',
-        discountedPrice: 5.99,
-        discountPercentage: 25,
-        unit: 'bottle'
-      },
-      { 
-        id: 13, 
-        name: 'Detergent', 
-        price: 9.99, 
-        image: '/assets/images/detergent.jpg',
-        discountedPrice: 7.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
-        { 
-        id: 13, 
-        name: 'Detergent', 
-        price: 9.99, 
-        image: '/assets/images/detergent.jpg',
-        discountedPrice: 7.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
-      { 
-        id: 14, 
-        name: 'Detergent', 
-        price: 9.99, 
-        image: '/assets/images/detergent.jpg',
-        discountedPrice: 7.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
-      { 
-        id: 14, 
-        name: 'Detergent', 
-        price: 9.99, 
-        image: '/assets/images/detergent.jpg',
-        discountedPrice: 7.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
-      { 
-        id: 15, 
-        name: 'Detergent', 
-        price: 9.99, 
-        image: '/assets/images/detergent.jpg',
-        discountedPrice: 7.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
-      { 
-        id: 16, 
-        name: 'Detergent', 
-        price: 9.99, 
-        image: '/assets/images/detergent.jpg',
-        discountedPrice: 7.99,
-        discountPercentage: 20,
-        unit: 'pack'
-      },
+      // { 
+      //   id: 7, 
+      //   name: 'Orange Juice', 
+      //   price: 3.99, 
+      //   image: 'https://th.bing.com/th/id/OIP.Yozl-i80qRnBbyEBai9D2gHaFj?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3',
+      //   discountedPrice: 2.99,
+      //   discountPercentage: 25,
+      //   unit: 'liter'
+      // },
+      // { 
+      //   id: 9, 
+      //   name: 'Cookies', 
+      //   price: 4.99, 
+      //   image: 'https://tse4.mm.bing.net/th/id/OIP._p_q5ZjpZwXFsjlTrHpW-QHaKx?rs=1&pid=ImgDetMain&o=7&rm=3',
+      //   discountedPrice: 3.99,
+      //   discountPercentage: 20,
+      //   unit: 'pack'
+      // },
+      // { 
+      //   id: 11, 
+      //   name: 'Shampoo', 
+      //   price: 7.99, 
+      //   image: 'https://tse3.mm.bing.net/th/id/OIP.2MuZIBUKGdnHLnPWE8Xi9wHaDt?rs=1&pid=ImgDetMain&o=7&rm=3',
+      //   discountedPrice: 5.99,
+      //   discountPercentage: 25,
+      //   unit: 'bottle'
+      // },
+      // // { 
+      // //   id: 13, 
+      // //   name: 'Detergent', 
+      // //   price: 9.99, 
+      // //   image: '/assets/images/detergent.jpg',
+      // //   discountedPrice: 7.99,
+      // //   discountPercentage: 20,
+      // //   unit: 'pack'
+      // // },
+      // //   { 
+      // //   id: 13, 
+      // //   name: 'Detergent', 
+      // //   price: 9.99, 
+      // //   image: '/assets/images/detergent.jpg',
+      // //   discountedPrice: 7.99,
+      // //   discountPercentage: 20,
+      // //   unit: 'pack'
+      // // },
+      // // { 
+      // //   id: 14, 
+      // //   name: 'Detergent', 
+      // //   price: 9.99, 
+      // //   image: '/assets/images/detergent.jpg',
+      // //   discountedPrice: 7.99,
+      // //   discountPercentage: 20,
+      // //   unit: 'pack'
+      // // },
+      // // { 
+      // //   id: 14, 
+      // //   name: 'Detergent', 
+      // //   price: 9.99, 
+      // //   image: '/assets/images/detergent.jpg',
+      // //   discountedPrice: 7.99,
+      // //   discountPercentage: 20,
+      // //   unit: 'pack'
+      // // },
+      // // { 
+      // //   id: 15, 
+      // //   name: 'Detergent', 
+      // //   price: 9.99, 
+      // //   image: '/assets/images/detergent.jpg',
+      // //   discountedPrice: 7.99,
+      // //   discountPercentage: 20,
+      // //   unit: 'pack'
+      // // },
+      // // { 
+      // //   id: 16, 
+      // //   name: 'Detergent', 
+      // //   price: 9.99, 
+      // //   image: '/assets/images/detergent.jpg',
+      // //   discountedPrice: 7.99,
+      // //   discountPercentage: 20,
+      // //   unit: 'pack'
+      // // },
     ];
 
     // Simulate API delay
@@ -354,7 +354,7 @@ const HomePage = () => {
         </section>
 
         {/* Promotions with improved spacing */}
-        <section className="mb-12">
+        {/* <section className="mb-12">
           <div className="flex justify-between items-center mb-6">
             <div>
               <span className="block text-red-600 font-medium text-sm mb-1">SPECIAL OFFERS</span>
@@ -362,7 +362,7 @@ const HomePage = () => {
             </div>
           </div>
           <Promotions promos={promoData} />
-        </section>
+        </section> */}
 
         {/* Featured Categories with Products - more visually appealing */}
         <section>
