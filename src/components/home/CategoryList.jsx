@@ -14,6 +14,7 @@ const CategoryList = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAll, setShowAll] = useState(false); // toggle for show more/less
 
   useEffect(() => {
     fetchCategories();
@@ -73,6 +74,8 @@ const CategoryList = () => {
     );
   }
 
+  const categoriesToShow = showAll ? categories : categories.slice(0, 12);
+
   return (
     <section className="py-8 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -81,9 +84,6 @@ const CategoryList = () => {
             Browse All Categories
           </h2>
           <div className="flex items-center gap-2">
-            {/* <span className="text-sm text-gray-500">
-              Showing {Math.min(categories.length, 20)} of {categories.length} categories
-            </span> */}
             {error && (
               <button
                 onClick={fetchCategories}
@@ -101,9 +101,9 @@ const CategoryList = () => {
           </div>
         )}
 
-        {/* Show only first 20 categories */}
+        {/* Categories Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-5">
-          {categories.slice(0, 12).map((category) => (
+          {categoriesToShow.map((category) => (
             <Link
               key={category.id}
               to={`/category/${category.slug}`}
@@ -123,6 +123,18 @@ const CategoryList = () => {
             </Link>
           ))}
         </div>
+
+        {/* Show More / Show Less Button */}
+        {categories.length > 12 && (
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-6 py-2 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition"
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
