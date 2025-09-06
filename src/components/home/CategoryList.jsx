@@ -81,9 +81,9 @@ const CategoryList = () => {
             Browse All Categories
           </h2>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500">
+            {/* <span className="text-sm text-gray-500">
               Showing {Math.min(categories.length, 20)} of {categories.length} categories
-            </span>
+            </span> */}
             {error && (
               <button
                 onClick={fetchCategories}
@@ -103,7 +103,7 @@ const CategoryList = () => {
 
         {/* Show only first 20 categories */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-5">
-          {categories.slice(0, 15).map((category) => (
+          {categories.slice(0, 12).map((category) => (
             <Link
               key={category.id}
               to={`/category/${category.slug}`}
